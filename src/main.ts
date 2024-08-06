@@ -19,7 +19,7 @@ canvas.style.height = `${rect.height}px`;
 
 const boundary = new Rectangle(0, 0, 602, 602);
 const qtree = new QuadTree(boundary, 4);
-const range = new Rectangle(rect.width / 2, rect.height / 2, 200, 200, "white");
+const range = new Rectangle(rect.width / 2, rect.height / 2, 200, 200, "green");
 const points: Point[] = [];
 let found: Point[] = [];
 let visualize = false;
