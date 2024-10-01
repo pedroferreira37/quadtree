@@ -58,7 +58,7 @@ export class QuadTree {
 		this.divided = true;
 	}
 
-	has(x: number, y: number) {
+	has(x: number, y: number): boolean {
 		for (const point of this.points) {
 			if (point.intersects(x, y)) return true;
 		}
@@ -71,6 +71,8 @@ export class QuadTree {
 				this.southeast!.has(x, y)
 			);
 		}
+
+		return false;
 	}
 
 	queryByPoint(x: number, y: number, found: Point[]) {
