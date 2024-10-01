@@ -7,7 +7,6 @@ body {
 }
 
 canvas {
-	border: 1px solid white;
 	background: black;
 	position: relative;
 	border-radius: 0.4rem;
@@ -35,6 +34,7 @@ button {
 	font-weight: bold;
 	text-decoration: underline;
 	padding: 1rem;
+	cursor: pointer;
 }
 
 .header {

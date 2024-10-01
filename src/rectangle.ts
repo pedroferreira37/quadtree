@@ -7,7 +7,13 @@ export class Rectangle {
 	height: number;
 	color: string;
 
-	constructor(x: number, y: number, width: number, height: number, color: string = "#ffffff") {
+	constructor(
+		x: number,
+		y: number,
+		width: number,
+		height: number,
+		color: string = "#ffffff"
+	) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -18,6 +24,11 @@ export class Rectangle {
 	move(x: number, y: number) {
 		this.x = x;
 		this.y = y;
+	}
+
+	resize(width: number, height: number) {
+		this.width = width;
+		this.height = height;
 	}
 
 	contains(point: Point) {

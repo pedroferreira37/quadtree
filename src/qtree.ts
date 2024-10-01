@@ -58,6 +58,40 @@ export class QuadTree {
 		this.divided = true;
 	}
 
+	has(x: number, y: number) {
+		for (const point of this.points) {
+			if (point.intersects(x, y)) return true;
+		}
+
+		if (this.divided) {
+			return (
+				this.northwest!.has(x, y) ||
+				this.northeast!.has(x, y) ||
+				this.southwest!.has(x, y) ||
+				this.southeast!.has(x, y)
+			);
+		}
+	}
+
+	queryByPoint(x: number, y: number, found: Point[]) {
+		if (!this.boundary.contains(new Point(x, y))) return found;
+
+		for (const point of this.points) {
+			if (point.intersects(x, y)) {
+				found.push(point);
+			}
+		}
+
+		if (this.divided) {
+			this.northwest!.queryByPoint(x, y, found);
+			this.northeast!.queryByPoint(x, y, found);
+			this.southwest!.queryByPoint(x, y, found);
+			this.southeast!.queryByPoint(x, y, found);
+		}
+
+		return found;
+	}
+
 	query(range: Rectangle, found: Point[]) {
 		if (!this.boundary.intersects(range)) return found;
 
@@ -79,7 +113,12 @@ export class QuadTree {
 
 	visualize(ctx: CanvasRenderingContext2D) {
 		ctx.strokeStyle = this.boundary.color;
-		ctx.strokeRect(this.boundary.x, this.boundary.y, this.boundary.width, this.boundary.height);
+		ctx.strokeRect(
+			this.boundary.x,
+			this.boundary.y,
+			this.boundary.width,
+			this.boundary.height
+		);
 		if (this.divided) {
 			this.northwest?.visualize(ctx);
 			this.southeast?.visualize(ctx);
